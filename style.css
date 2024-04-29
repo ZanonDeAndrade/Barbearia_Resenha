@@ -92,6 +92,7 @@
     color: #FFF;
     margin-top: 8%; /* Mantém a caixa centralizada verticalmente */
     display: flex;
+    margin-bottom: 10%;
 }
 
 .Natan img {

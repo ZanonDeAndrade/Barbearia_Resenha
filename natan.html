@@ -17,7 +17,7 @@
         </div>
         <div class="servicos">
             <h2>SERVIÇOS (5)</h2>
-            <form>
+            <form onsubmit="filterServices(); return false;">
 
                 <input type="text" id="search-input" placeholder="Pesquise um serviço...">
     
@@ -26,7 +26,7 @@
             </form>
         </div>
         <div class="tipo_servico">
-            <div class="corte_cabelo" onclick="redirecionarParaCorteCabelo_Natan()">
+            <div class="corte_cabelo" onclick="redirecionarParaCorteCabelo_Bruno()">
                 <img src="./assets/FK-Cortes-de-cabelo-masculino-capa 1.png" alt="Corte de Cabelo">
                 <div class="descricao_corte_cabelo">
                     <h3>Corte de Cabelo</h3>
@@ -34,7 +34,7 @@
                     <p class="duracao">Duração: 1 hora</p>
                 </div>
             </div>
-            <div class="corte_maquina" onclick="redirecionarParaCorteMaquina_Natan()">
+            <div class="corte_maquina" onclick="redirecionarParaCorteMaquina_Bruno()">
                 <img src="./assets/Técnicas-de-corte-de-cabelo-masculino 1.png" alt="Corte de Maquina">
                 <div class="descricao_corte_maquina">
                     <h3>Corte de Maquina</h3>
@@ -42,7 +42,7 @@
                     <p class="duracao">Duração: 30min</p>
                 </div>
             </div>
-            <div class="corte_barba" onclick="redirecionarParaCorteBarba_Natan()">
+            <div class="corte_barba" onclick="redirecionarParaCorteBarba_Bruno()">
                 <img src="./assets/image 1(1).png" alt="Barba Completa">
                 <div class="descricao_corte_barba">
                     <h3>Barba Completa</h3>
@@ -50,7 +50,7 @@
                     <p class="duracao">Duração: 45min</p>
                 </div>
             </div>
-            <div class="corte_barba_e_cabelo" onclick="redirecionarParaCorteCabelo_e_Barba_Natan()">
+            <div class="corte_barba_e_cabelo" onclick="redirecionarParaCorteCabelo_e_Barba_Bruno()">
                 <img src="./assets/image 2.png" alt="Corte de Cabelo e Barba">
                 <div class="descricao_corte_cabelo_e_barba">
                     <h3>Corte de Cabelo e Barba</h3>
@@ -58,7 +58,7 @@
                     <p class="duracao">Duração: 1h e 30min</p>
                 </div>
             </div>
-            <div class="corte_cabelo_crianca" onclick="redirecionarParaCorteCabeloCrianca_Natan()">
+            <div class="corte_cabelo_crianca" onclick="redirecionarParaCorteCabeloCrianca_Bruno()">
                 <img src="./assets/image 3.png" alt="Corte de Cabelo Criança">
                 <div class="descricao_corte_cabelo_criaca">
                     <h3>Corte de Cabelo Infantil</h3>
@@ -79,7 +79,7 @@
         .servicos input[type="text"] {
             flex-grow: 1;
             padding: 10px;
-            border: 1px solid #000;
+            border: 1px solid #000000;
             border-radius: 5px 0 0 5px;
         }
 
@@ -94,19 +94,21 @@
     </style>
 
     <script>
-            function filterServices() {
-        const input = document.getElementById('search-input');
-        const filter = input.value.toUpperCase();
-        const services = document.getElementsByClassName('corte_cabelo');
+        function filterServices() {
+            const input = document.getElementById('search-input');
+            const filter = input.value.toUpperCase();
+            const services = document.getElementsByClassName('tipo_servico')[0].children;
 
-        for (let i = 0; i < services.length; i++) {
-            if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
-                services[i].style.display = '';
-            } else {
-                services[i].style.display = 'none';
+            for (let i = 0; i < services.length; i++) {
+                if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
+                    services[i].style.display = '';
+                } else {
+                    services[i].style.display = 'none';
+                }
             }
+            return false; // Evita o envio padrão do formulário
         }
-    }
+
     </script>
 </body>
 </html>

@@ -58,5 +58,32 @@ function redirecionarParaBruno() {
     window.location.href = 'Corte_crianca_Natan.html'
   }
 
+  window.onload = function () {
+    var data = new Date();
+    var hora = data.getHours();
+    var redirecionado = document.cookie.includes("redirecionado=true");
 
-  
+    // Verifica se está entre 7 e 20 horas
+    if (hora >= 7 && hora <= 21 && !redirecionado) {
+        window.location.href = 'index.html';
+        // Define o cookie "redirecionado" como true
+        document.cookie = "redirecionado=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/";
+    } else if (!redirecionado) {
+        window.location.href = 'index_fechado.html';
+        // Define o cookie "redirecionado" como true
+        document.cookie = "redirecionado=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/";
+    } else {
+        // Se o cookie "redirecionado" já existir, redefine-o como false
+        document.cookie = "redirecionado=false; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    }
+}
+
+
+
+
+
+
+
+
+
+

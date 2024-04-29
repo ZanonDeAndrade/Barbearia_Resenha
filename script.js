@@ -36,8 +36,6 @@ function redirecionarParaBruno() {
 
 
 
-
-
   function redirecionarParaCorteCabelo_Natan(){
     window.location.href = 'Corte_cabelo_Natan.html'
   }

@@ -17,7 +17,7 @@
         </div>
         <div class="servicos">
             <h2>SERVIÇOS (5)</h2>
-            <form>
+            <form onsubmit="filterServices(); return false;">
 
                 <input type="text" id="search-input" placeholder="Pesquise um serviço...">
     
@@ -94,19 +94,21 @@
     </style>
 
     <script>
-            function filterServices() {
-        const input = document.getElementById('search-input');
-        const filter = input.value.toUpperCase();
-        const services = document.getElementsByClassName('corte_cabelo');
+        function filterServices() {
+            const input = document.getElementById('search-input');
+            const filter = input.value.toUpperCase();
+            const services = document.getElementsByClassName('tipo_servico')[0].children;
 
-        for (let i = 0; i < services.length; i++) {
-            if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
-                services[i].style.display = '';
-            } else {
-                services[i].style.display = 'none';
+            for (let i = 0; i < services.length; i++) {
+                if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
+                    services[i].style.display = '';
+                } else {
+                    services[i].style.display = 'none';
+                }
             }
+            return false; // Evita o envio padrão do formulário
         }
-    }
+
     </script>
 </body>
 </html>

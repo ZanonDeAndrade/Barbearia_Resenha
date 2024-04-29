@@ -23,7 +23,7 @@
 }
 
 .topo h2{
-    color: #A7A7A7;
+    color: #ffffff;
     font-size: 70%;
     margin-left: 70%;
     margin-top: -11%;
@@ -33,7 +33,7 @@
     color: #000; /* Cor do texto */
     font-size: 100%; /* Tamanho da fonte */
     margin-left: 10%; /* Margem à esquerda */
-    background-color: #00FFa3; /* Cor de fundo */
+    background-color: #5bff56; /* Cor de fundo */
     opacity: 0.8; /* Opacidade */
     padding: 1.5%;
     border-radius: 5px;

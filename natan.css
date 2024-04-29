@@ -1,0 +1,199 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topo {
+    background-color: black;
+}
+
+.topo img {
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.voltar{
+    font-size:50%;
+    margin-top: -25%;
+    color: #000;
+    background-color: #FFF;
+    width: 16.5%;
+    border-radius: 2px;
+    padding: 1%;
+    margin-left: 2%;
+    margin-bottom: 18%;
+}
+
+.servicos{
+    font-size: 75%;
+    padding: 5%;
+    margin-top: 1%;
+}
+
+.servicos h4 {
+    padding: 2%;
+    border: 2px solid #000;
+    border-radius: 5px;
+    color: #6e6e6e;
+    margin-top: 4%;
+}
+
+.corte_cabelo img {
+    width: 30.5%;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.corte_cabelo {
+    display: flex;
+    align-items: center; /* Alinhar os itens verticalmente */
+    border: 2px solid #000;
+    margin-left: 5%;
+    border-radius: 7px;
+    margin-right: 5%;
+    padding: 1%;
+}
+
+.descricao_corte_cabelo{
+        font-size: 80%;
+        margin-left: 5%;
+
+        h3 {
+            margin-bottom: 10%;
+        }
+
+        h4{
+            margin-bottom: 10%;
+        }
+}
+
+.descricao_corte_maquina{
+    font-size: 80%;
+    margin-left: 5%;
+
+    h3 {
+        margin-bottom: 10%;
+    }
+
+    h4{
+        margin-bottom: 10%;
+    }
+}
+
+.descricao_corte_barba{
+    font-size: 80%;
+    margin-left: 5%;
+
+    h3 {
+        margin-bottom: 10%;
+    }
+
+    h4{
+        margin-bottom: 10%;
+    }
+}
+
+.descricao_corte_cabelo_e_barba{
+    font-size: 80%;
+    margin-left: 5%;
+
+    h3 {
+        margin-bottom: 7%;
+    }
+
+    h4{
+        margin-bottom: 7%;
+    }
+}
+
+.descricao_corte_cabelo_criaca{
+    font-size: 80%;
+    margin-left: 5%;
+
+    h3 {
+        margin-bottom: 7%;
+    }
+
+    h4{
+        margin-bottom: 7%;
+    }
+}
+
+
+.corte_maquina img {
+    width: 31%;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.corte_maquina {
+    display: flex;
+    align-items: center; /* Alinhar os itens verticalmente */
+    border: 2px solid #000;
+    margin-left: 5%;
+    border-radius: 7px;
+    margin-right: 5%;
+    padding: 1%;
+    margin-top: 5%;
+}
+
+
+.corte_barba img {
+    width: 32%;
+    border-radius: 5px;
+    flex-shrink: 0;
+ 
+}
+
+.corte_barba{
+    display: flex;
+    align-items: center; /* Alinhar os itens verticalmente */
+    border: 2px solid #000;
+    margin-left: 5%;
+    border-radius: 7px;
+    margin-right: 5%;
+    padding: 1%;
+    margin-top: 5%;
+}
+
+.corte_barba_e_cabelo img {
+    width: 32.3%;
+    border-radius: 5px;
+    flex-shrink: 0;
+    height: 115px;
+}
+
+.corte_barba_e_cabelo{
+    display: flex;
+    align-items: center; /* Alinhar os itens verticalmente */
+    border: 2px solid #000;
+    margin-left: 5%;
+    border-radius: 7px;
+    margin-right: 5%;
+    padding: 1%;
+    margin-top: 5%;
+}
+
+
+.corte_cabelo_crianca img {
+    width: 33%;
+    border-radius: 5px;
+    flex-shrink: 0;
+    height: 115px;
+    margin-top: 0.5%;
+}
+
+.corte_cabelo_crianca{
+    display: flex;
+    align-items: center; /* Alinhar os itens verticalmente */
+    border: 2px solid #000;
+    margin-left: 5%;
+    border-radius: 7px;
+    margin-right: 5%;
+    padding: 1%;
+    margin-top: 5%;
+}
+

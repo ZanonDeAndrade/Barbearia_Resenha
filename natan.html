@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bruno.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <main>
+        <div class="topo">
+            <img src="./assets/432103263_1437441706876446_1266250850596522407_n.jpg" alt="">
+        </div>
+        <div class="voltar" onclick="redirecionarParaInicio()">
+            <h1>VOLTAR</h1>
+        </div>
+        <div class="servicos">
+            <h2>SERVIÇOS (5)</h2>
+            <form>
+
+                <input type="text" id="search-input" placeholder="Pesquise um serviço...">
+    
+                <button type="submit">Pesquisar</button>
+    
+            </form>
+        </div>
+        <div class="tipo_servico">
+            <div class="corte_cabelo" onclick="redirecionarParaCorteCabelo_Natan()">
+                <img src="./assets/FK-Cortes-de-cabelo-masculino-capa 1.png" alt="Corte de Cabelo">
+                <div class="descricao_corte_cabelo">
+                    <h3>Corte de Cabelo</h3>
+                    <h4>R$30,00</h4>
+                    <p class="duracao">Duração: 1 hora</p>
+                </div>
+            </div>
+            <div class="corte_maquina" onclick="redirecionarParaCorteMaquina_Natan()">
+                <img src="./assets/Técnicas-de-corte-de-cabelo-masculino 1.png" alt="Corte de Maquina">
+                <div class="descricao_corte_maquina">
+                    <h3>Corte de Maquina</h3>
+                    <h4>R$20,00</h4>
+                    <p class="duracao">Duração: 30min</p>
+                </div>
+            </div>
+            <div class="corte_barba" onclick="redirecionarParaCorteBarba_Natan()">
+                <img src="./assets/image 1(1).png" alt="Barba Completa">
+                <div class="descricao_corte_barba">
+                    <h3>Barba Completa</h3>
+                    <h4>R$25,00</h4>
+                    <p class="duracao">Duração: 45min</p>
+                </div>
+            </div>
+            <div class="corte_barba_e_cabelo" onclick="redirecionarParaCorteCabelo_e_Barba_Natan()">
+                <img src="./assets/image 2.png" alt="Corte de Cabelo e Barba">
+                <div class="descricao_corte_cabelo_e_barba">
+                    <h3>Corte de Cabelo e Barba</h3>
+                    <h4>R$50,00</h4>
+                    <p class="duracao">Duração: 1h e 30min</p>
+                </div>
+            </div>
+            <div class="corte_cabelo_crianca" onclick="redirecionarParaCorteCabeloCrianca_Natan()">
+                <img src="./assets/image 3.png" alt="Corte de Cabelo Criança">
+                <div class="descricao_corte_cabelo_criaca">
+                    <h3>Corte de Cabelo Criança</h3>
+                    <h4>R$25,00</h4>
+                    <p class="duracao">Duração: 1 hora</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <style>
+        .servicos form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .servicos input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .servicos button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #000;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+            function filterServices() {
+        const input = document.getElementById('search-input');
+        const filter = input.value.toUpperCase();
+        const services = document.getElementsByClassName('corte_cabelo');
+
+        for (let i = 0; i < services.length; i++) {
+            if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
+                services[i].style.display = '';
+            } else {
+                services[i].style.display = 'none';
+            }
+        }
+    }
+    </script>
+</body>
+</html>

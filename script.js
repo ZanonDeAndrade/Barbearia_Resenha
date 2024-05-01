@@ -14,48 +14,8 @@ function redirecionarParaBruno() {
     window.location.href = 'index.html'
   }
 
-  function redirecionarParaCorteCabelo_Bruno(){
-    window.location.href = 'Corte_cabelo_Bruno.html'
-  }
-
-  function redirecionarParaCorteMaquina_Bruno(){
-    window.location.href = 'Corte_maquina_Bruno.html'
-  }
-
-  function redirecionarParaCorteBarba_Bruno(){
-    window.location.href = 'Barba_completa_Bruno.html'
-  }
-
-  function redirecionarParaCorteCabelo_e_Barba_Bruno(){
-    window.location.href = 'Barba_e_cabelo_Bruno.html'
-  }
-
-  function redirecionarParaCorteCabeloCrianca_Bruno(){
-    window.location.href = 'Corte_crianca_Bruno.html'
-  }
-
-
-
-  function redirecionarParaCorteCabelo_Natan(){
-    window.location.href = 'Corte_cabelo_Natan.html'
-  }
-
-  function redirecionarParaCorteMaquina_Natan(){
-    window.location.href = 'Corte_maquina_Natan.html'
-  }
-
-  function redirecionarParaCorteBarba_Natan(){
-    window.location.href = 'Barba_completa_Natan.html'
-  }
-
-
-  function redirecionarParaCorteCabelo_e_Barba_Natan(){
-    window.location.href = 'Barba_e_cabelo_Natan.html'
-  }
-
-
-  function redirecionarParaCorteCabeloCrianca_Natan(){
-    window.location.href = 'Corte_crianca_Natan.html'
+  function redirecionarescolha_horario(){
+    window.location.href = 'escolha_horario.html'
   }
 
 

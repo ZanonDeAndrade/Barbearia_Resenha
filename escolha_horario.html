@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário</title>
+    <script src="./script.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+       .topo {
+            background-color: black;
+        }
+
+       .topo img {
+            display: block;
+            width: 30%;
+            margin: 0 auto;
+        }
+
+       .voltar {
+            font-size: 50%;
+            margin-top: -25%;
+            color: #000;
+            background-color: #FFF;
+            width: 20%;
+            border-radius: 2px;
+            padding: 1%;
+            padding-left: 2%;
+            margin-left: 5%;
+            margin-bottom: 18%;
+        }
+
+        #calendar {
+            width: 95%;
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #week-days {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-weight: bold;
+            background-color: #ffffff;
+        }
+
+        #week-days span {
+            flex: 1;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+        }
+
+        #days {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+
+       .day {
+            width: calc(100% / 7);
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            text-align: center;
+            background-color:#FFF ;
+            cursor: pointer;
+        }
+
+       .current-month {
+            background-color: #fff;
+        }
+
+       .today {
+            background-color: #cecdcd;
+            border-radius: 5px;
+        }
+
+       .selected {
+            background-color: #000000;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+       .last-row {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+       .last-row .day {
+            margin-bottom: 0;
+        }
+
+        #available-times {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #time-dropdown {
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topo">
+    <img src="./assets/432103263_1437441706876446_1266250850596522407_n.jpg" alt="">
+</div>
+<div class="voltar" onclick="redirecionarParaBruno()">
+    <h1>VOLTAR</h1>
+</div>
+<div id="calendar">
+    <div id="week-days">
+        <span>Segunda</span>
+        <span>Terça</span>
+        <span>Quarta</span>
+        <span>Quinta</span>
+        <span>Sexta</span>
+        <span>Sábado</span>
+        <span>Domingo</span>
+    </div>
+    <button id="prev-month">Mês Anterior</button>
+    <button id="next-month">Próximo Mês</button>
+    <div id="month-year"></div>
+    <ul id="days"></ul>
+    <div id="available-times">
+        <h3>Horários disponíveis:</h3>
+        <select id="time-dropdown">
+            <!-- Horários para dias da semana (segunda a sexta) -->
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <!-- Horários para sábado -->
+            <option value="08:00">08:00</option>
+            <option value="10:00">10:00</option>
+            <option value="12:00">12:00</option>
+            <!-- Domingo não tem horário -->
+        </select>
+    </div>
+</div>
+
+<script>
+    const currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    let currentMonth = currentDate.getMonth();
+    let currentDay = currentDate.getDate();
+
+    const calendar = document.getElementById("calendar");
+    const days = calendar.querySelector("#days");
+    const prevMonthBtn = calendar.querySelector("#prev-month");
+    const nextMonthBtn = calendar.querySelector("#next-month");
+    const monthYear = calendar.querySelector("#month-year");
+    const timeDropdown = document.getElementById("time-dropdown");
+    const daysOfWeek = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+    renderMonth(currentYear, currentMonth);
+
+    prevMonthBtn.addEventListener("click", () => {
+        if (currentMonth === 0) {
+            currentYear -= 1;
+            currentMonth = 11;
+        } else {
+            currentMonth -= 1;
+        }
+        renderMonth(currentYear, currentMonth);
+    });
+
+    nextMonthBtn.addEventListener("click", () => {
+        if (currentMonth === 11) {
+            currentYear += 1;
+            currentMonth = 0;
+        } else {
+            currentMonth += 1;
+        }
+        renderMonth(currentYear, currentMonth);
+    });
+
+    function renderMonth(year, month) {
+        days.innerHTML = "";
+        const firstDayOfMonth = new Date(year, month, 1);
+        const lastDayOfMonth = new Date(year, month + 1, 0);
+        const daysInMonth = lastDayOfMonth.getDate();
+        const firstDayOfWeek = firstDayOfMonth.getDay(); // Domingo: 0, Segunda: 1, ..., Sábado: 6
+
+        // Renderiza dias vazios até o primeiro dia do mês começar na posição correta na semana
+        for (let i = 0; i < firstDayOfWeek; i++) {
+            const emptyLi = document.createElement("li");
+            emptyLi.classList.add("day");
+            emptyLi.classList.add("other-month");
+            days.appendChild(emptyLi);
+        }
+
+        // Renderiza os dias do mês
+        for (let i = 1; i <= daysInMonth; i++) {
+            const li = document.createElement("li");
+            li.classList.add("day");
+            li.textContent = i;
+
+            // Adiciona classes de estilo
+            const dayOfWeek = (firstDayOfWeek + i - 1) % 7; // Dia da semana (0 a 6)
+            if (dayOfWeek === 0) {
+                li.classList.add("current-month");
+            } else {
+                li.classList.add("other-month");
+            }
+            if (i === currentDay && month === currentMonth && year === currentYear) {
+                li.classList.add("today");
+            }
+
+            // Adiciona evento de clique para selecionar a data e mostrar horários disponíveis
+            li.addEventListener("click", () => {
+                const currentSelected = document.querySelector(".selected");
+                if (currentSelected) {
+                    currentSelected.classList.remove("selected");
+                }
+                li.classList.add("selected");
+
+                // Mostra os horários disponíveis
+                showAvailableTimes(dayOfWeek);
+            });
+
+            days.appendChild(li);
+        }
+
+        // Atualiza o texto do mês e ano
+        monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
+    }
+
+    // Função para mostrar os horários disponíveis
+    function showAvailableTimes(dayOfWeek) {
+        const availableTimesDiv = document.getElementById("available-times");
+        const dropdown = document.getElementById("time-dropdown");
+        dropdown.innerHTML = ""; // Limpa as opções anteriores
+
+        // Verifica o dia da semana
+        if (dayOfWeek === 6) { // Sábado
+            const saturdayTimes = ["08:00", "10:00", "12:00"];
+            saturdayTimes.forEach(time => {
+                const option = document.createElement("option");
+                option.textContent = time;
+                option.value = time;
+                dropdown.appendChild(option);
+            });
+        } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
+            const weekdayTimes = ["09:00", "10:00", "11:00"];
+            weekdayTimes.forEach(time => {
+                const option = document.createElement("option");
+                option.textContent = time;
+                option.value = time;
+                dropdown.appendChild(option);
+            });
+        }
+
+        availableTimesDiv.style.display = "block";
+    }
+</script>
+</body>
+</html>

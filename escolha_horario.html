@@ -133,7 +133,7 @@
             background-position: right center; /* Posiciona a seta personalizada */
             background-size: 30%; /* Tamanho da seta personalizada */
             text-align: center;
-            margin-bottom: 25%;
+            margin-bottom: 15%;
         }
 
         #calendar-controls {
@@ -166,6 +166,20 @@
             transform: translateX(-50%);
             font-size: 17px;
         }
+        .confirmar {
+            background-color: #FFF;
+            color: #000;
+            border: 2px solid #000;
+            font-size: 55%;
+            font-weight: bold;
+            width: 70%;
+            text-align: center;
+            padding: 2%;
+            border-radius: 5px;
+            margin: 0 auto; /* Isso centraliza a caixa horizontalmente */
+            margin-bottom: 25%;
+        }
+
     </style>
 </head>
 <body>
@@ -209,6 +223,9 @@
             <option value="11:00">13:00</option>
             <!-- Domingo não tem horário -->
         </select>
+    </div>
+    <div class="confirmar" onclick="confirmarAgendamento()">
+        <h1>Confirmar Agendamento</h1>
     </div>
 
     <!-- Snackbar para alertar o usuário -->
@@ -337,8 +354,32 @@
         snackbar.style.visibility = "visible";
         setTimeout(function () {
             snackbar.style.visibility = "hidden";
-        }, 3000); // Esconde o Snackbar após 3 segundos
+        }, 4000); // Esconde o Snackbar após 3 segundos
     });
+
+
+    function confirmarAgendamento() {
+        // Obtemos a data selecionada
+        const selectedDate = document.querySelector('.selected').textContent;
+
+        // Obtemos o horário selecionado
+        const selectedTime = document.getElementById('time-dropdown').value;
+
+        // Formamos a mensagem a ser enviada para o WhatsApp
+        const mensagem = `Olá! Meu agendamento está confirmado para o dia ${selectedDate} às ${selectedTime}.`;
+
+        // Formata a mensagem para incluir na URL
+        const mensagemFormatada = encodeURIComponent(mensagem);
+
+        // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
+        const numeroTelefone = "+5555999061027";
+
+        // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
+        window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
+    }
+
+
+
 </script>
 </body>
 </html>

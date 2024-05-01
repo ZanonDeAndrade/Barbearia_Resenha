@@ -13,17 +13,17 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-       .topo {
+        .topo {
             background-color: black;
         }
 
-       .topo img {
+        .topo img {
             display: block;
             width: 30%;
             margin: 0 auto;
         }
 
-       .voltar {
+        .voltar {
             font-size: 50%;
             margin-top: -25%;
             color: #000;
@@ -41,21 +41,30 @@
             max-width: 450px;
             margin: 0 auto;
             text-align: center;
+            display: flex;
+            flex-direction: column; /* Altera o layout para coluna */
+        }
+
+        #month-year {
+            margin-top: 10%; /* Espaço acima do texto do mês */
+            font-size: 140%;
+            font-weight: bold;
+            margin-bottom: 5%;
+            
         }
 
         #week-days {
             display: flex;
             justify-content: space-between;
-            padding: 5px 0;
+            padding: 5px 0px;
             font-weight: bold;
             background-color: #ffffff;
         }
 
         #week-days span {
-            flex: 1;
-            height: 30px;
             line-height: 30px;
-            font-size: 14px;
+            font-size: 70%;
+            margin-right: 3%;
         }
 
         #days {
@@ -67,7 +76,7 @@
             margin-top: 10px;
         }
 
-       .day {
+        .day {
             width: calc(100% / 7);
             height: 50px;
             line-height: 50px;
@@ -77,28 +86,28 @@
             cursor: pointer;
         }
 
-       .current-month {
+        .current-month {
             background-color: #fff;
         }
 
-       .today {
+        .today {
             background-color: #cecdcd;
             border-radius: 5px;
         }
 
-       .selected {
+        .selected {
             background-color: #000000;
             color: #ffffff;
             border-radius: 5px;
         }
 
-       .last-row {
+        .last-row {
             display: flex;
             flex-wrap: nowrap;
             justify-content: space-between;
         }
 
-       .last-row .day {
+        .last-row .day {
             margin-bottom: 0;
         }
 
@@ -115,19 +124,46 @@
             background-color: #FFF;
             border: 2px solid #000;
             border-radius: 5px;
-            width: 50%;
+            width: 45%;
             -webkit-appearance: none; /* Remove a aparência padrão do seletor */
             -moz-appearance: none;
             appearance: none;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>'); /* Define uma imagem personalizada como a seta */
             background-repeat: no-repeat;
             background-position: right center; /* Posiciona a seta personalizada */
-            background-size: 20%; /* Tamanho da seta personalizada */
+            background-size: 30%; /* Tamanho da seta personalizada */
             text-align: center;
         }
 
+        #calendar-controls {
+            margin-top: 20px; /* Espaço acima dos controles */
+        }
 
+        #calendar-controls button {
+            margin: 5px;
+            background-color: #FFF;
+            border: 2px solid #000;
+            border-radius: 5px;
+            padding: 2%;
+            font-size: 80%;
+        }
 
+        /* Estilo para o Snackbar */
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 17px;
+        }
     </style>
 </head>
 <body>
@@ -139,19 +175,23 @@
     <h1>VOLTAR</h1>
 </div>
 <div id="calendar">
+    <div id="month-year"></div>
     <div id="week-days">
+        <span>Domingo</span>
         <span>Segunda</span>
         <span>Terça</span>
         <span>Quarta</span>
         <span>Quinta</span>
         <span>Sexta</span>
         <span>Sábado</span>
-        <span>Domingo</span>
     </div>
-    <button id="prev-month">Mês Anterior</button>
-    <button id="next-month">Próximo Mês</button>
-    <div id="month-year"></div>
     <ul id="days"></ul>
+
+    <div id="calendar-controls">
+        <button id="prev-month"><b>< Mês Anterior</b></button>
+        <button id="next-month"><b>Próximo Mês ></b></button>
+    </div>
+
     <div id="available-times">
         <h3>Horários disponíveis:</h3>
         <select id="time-dropdown">
@@ -168,6 +208,9 @@
             <!-- Domingo não tem horário -->
         </select>
     </div>
+
+    <!-- Snackbar para alertar o usuário -->
+    <div id="snackbar">Por favor, selecione uma data e um horário para o agendamento.</div>
 </div>
 
 <script>
@@ -182,7 +225,7 @@
     const nextMonthBtn = calendar.querySelector("#next-month");
     const monthYear = calendar.querySelector("#month-year");
     const timeDropdown = document.getElementById("time-dropdown");
-    const daysOfWeek = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    const daysOfWeek = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
     renderMonth(currentYear, currentMonth);
@@ -285,6 +328,15 @@
 
         availableTimesDiv.style.display = "block";
     }
+
+    // Mostra o Snackbar quando a página é carregada
+    document.addEventListener('DOMContentLoaded', function () {
+        var snackbar = document.getElementById("snackbar");
+        snackbar.style.visibility = "visible";
+        setTimeout(function () {
+            snackbar.style.visibility = "hidden";
+        }, 3000); // Esconde o Snackbar após 3 segundos
+    });
 </script>
 </body>
 </html>

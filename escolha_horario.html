@@ -104,13 +104,30 @@
 
         #available-times {
             display: none;
-            margin-top: 20px;
+            margin-top: 15%;
         }
 
         #time-dropdown {
-            padding: 5px;
-            font-size: 14px;
+            padding: 2%;
+            font-size: 130%; /* Tamanho do texto do seletor */
+            margin-top: 5%;
+            color: #000;
+            background-color: #FFF;
+            border: 2px solid #000;
+            border-radius: 5px;
+            width: 50%;
+            -webkit-appearance: none; /* Remove a aparência padrão do seletor */
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>'); /* Define uma imagem personalizada como a seta */
+            background-repeat: no-repeat;
+            background-position: right center; /* Posiciona a seta personalizada */
+            background-size: 20%; /* Tamanho da seta personalizada */
+            text-align: center;
         }
+
+
+
     </style>
 </head>
 <body>
@@ -142,10 +159,12 @@
             <option value="09:00">09:00</option>
             <option value="10:00">10:00</option>
             <option value="11:00">11:00</option>
+            <option value="11:00">12:00</option>
             <!-- Horários para sábado -->
             <option value="08:00">08:00</option>
             <option value="10:00">10:00</option>
             <option value="12:00">12:00</option>
+            <option value="11:00">13:00</option>
             <!-- Domingo não tem horário -->
         </select>
     </div>
@@ -247,7 +266,7 @@
 
         // Verifica o dia da semana
         if (dayOfWeek === 6) { // Sábado
-            const saturdayTimes = ["08:00", "10:00", "12:00"];
+            const saturdayTimes = ["08:00", "10:00", "12:00", "13:00"];
             saturdayTimes.forEach(time => {
                 const option = document.createElement("option");
                 option.textContent = time;
@@ -255,7 +274,7 @@
                 dropdown.appendChild(option);
             });
         } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
-            const weekdayTimes = ["09:00", "10:00", "11:00"];
+            const weekdayTimes = ["09:00", "10:00", "11:00", "12:00"];
             weekdayTimes.forEach(time => {
                 const option = document.createElement("option");
                 option.textContent = time;

@@ -377,44 +377,36 @@
 
     // Função para confirmar o agendamento
     function confirmarAgendamento() {
-    // Obtemos a data selecionada
+    // Verifica se algum horário foi selecionado
+    const selectedTimeButton = document.querySelector('.time-button.selected');
+    if (!selectedTimeButton) {
+        // Se nenhum horário foi selecionado, exibe uma mensagem de alerta
+        const snackbar = document.getElementById("snackbar");
+        snackbar.textContent = "Por favor, selecione um horário antes de confirmar o agendamento.";
+        snackbar.style.visibility = "visible";
+        setTimeout(function () {
+            snackbar.style.visibility = "hidden";
+        }, 3000); // Esconde o Snackbar após 3 segundos
+        return; // Encerra a função sem confirmar o agendamento
+    }
+
+    // Se um horário foi selecionado, continua com a confirmação do agendamento
     const selectedDate = document.querySelector('.selected').textContent;
-
-    // Obtemos o horário selecionado
-    let selectedTime;
-    const timeButtons = document.querySelectorAll('.time-button');
-    timeButtons.forEach(button => {
-        if (button.classList.contains('selected')) {
-            selectedTime = button.textContent;
-        }
-    });
-
-    // Obtemos o nome do mês atual
+    const selectedTime = selectedTimeButton.textContent;
     const currentMonthName = months[currentMonth];
-
-    // Obtemos o serviço selecionado da variável global
     const servicoSelecionado = localStorage.getItem('servicoSelecionado');
-
-    // Obtemos o preço do serviço selecionado
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
-
-    // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `✅  Confirmação de Agendamento 💈
-🗓️ Data: ${selectedDate} / ${currentMonthName}
+    const mensagem = `✅  Confirmação de Agendamento 💈\n🗓️ Data: ${selectedDate} / ${currentMonthName}
 ⏰ Hora: ${selectedTime}
 ✂️ Serviço: ${servicoSelecionado}
-💇🏻‍♂️ Profissional: Natan Peixoto
+💇🏻‍♂️ Profissional: Bruno Descovi
 💰 Valor: ${precoServicoSelecionado}`;
 
-    // Formata a mensagem para incluir na URL
     const mensagemFormatada = encodeURIComponent(mensagem);
-
-    // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
     const numeroTelefone = "+5555999061027";
-
-    // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
+
 </script>
 
 </body>

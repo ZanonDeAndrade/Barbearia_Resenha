@@ -37,7 +37,7 @@
         }
 
         #calendar {
-            width: 90%;
+            width: 98%;
             max-width: 450px;
             margin: 0 auto;
             text-align: center;
@@ -64,8 +64,7 @@
         #week-days span {
             line-height: 30px;
             font-size: 75%;
-            margin-left: -2%;
-            margin-right: 5%;
+          
         }
 
         #days {
@@ -180,6 +179,8 @@
             margin: 0 auto; /* Isso centraliza a caixa horizontalmente */
             margin-bottom: 25%;
         }
+
+
 
     </style>
 </head>
@@ -358,27 +359,44 @@
             snackbar.style.visibility = "hidden";
         }, 4000); // Esconde o Snackbar após 3 segundos
     });
+
+
+    
+    // Recupere o serviço armazenado no Local Storage
+   // Recupere o serviço armazenado no Local Storage
+    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
+
+    // Exiba o serviço selecionado na página
+    const servicoSelecionadoDiv = document.getElementById('servico-selecionado');
+    servicoSelecionadoDiv.textContent = `Serviço Selecionado: ${servicoSelecionado}`;
+
+
+
     
 
     function confirmarAgendamento() {
-        // Obtemos a data selecionada
-        const selectedDate = document.querySelector('.selected').textContent;
+    // Obtemos a data selecionada
+    const selectedDate = document.querySelector('.selected').textContent;
 
-        // Obtemos o horário selecionado
-        const selectedTime = document.getElementById('time-dropdown').value;
+    // Obtemos o horário selecionado
+    const selectedTime = document.getElementById('time-dropdown').value;
 
-        // Formamos a mensagem a ser enviada para o WhatsApp
-        const mensagem = `Olá! Meu agendamento está confirmado para o dia ${selectedDate} às ${selectedTime}.`;
+    // Obtemos o nome do mês atual
+    const currentMonthName = months[currentMonth];
 
-        // Formata a mensagem para incluir na URL
-        const mensagemFormatada = encodeURIComponent(mensagem);
+    // Formamos a mensagem a ser enviada para o WhatsApp
+    const mensagem = `Olá! Gostaria de confirmar meu agendamento de ${servicoSelecionado} para o dia ${selectedDate} de ${currentMonthName} às ${selectedTime}.`;
 
-        // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
-        const numeroTelefone = "+5555999061027";
+    // Formata a mensagem para incluir na URL
+    const mensagemFormatada = encodeURIComponent(mensagem);
 
-        // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
-        window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
-    }
+    // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
+    const numeroTelefone = "+5555999061027";
+
+    // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
+    window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
+}
+
 
 
 

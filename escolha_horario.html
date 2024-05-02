@@ -37,7 +37,7 @@
         }
 
         #calendar {
-            width: 95%;
+            width: 90%;
             max-width: 450px;
             margin: 0 auto;
             text-align: center;
@@ -55,16 +55,17 @@
 
         #week-days {
             display: flex;
-            justify-content: space-between;
-            padding: 5px 0px;
+            justify-content: space-around;
+            padding: 5px, 0px;
             font-weight: bold;
             background-color: #ffffff;
         }
 
         #week-days span {
             line-height: 30px;
-            font-size: 70%;
-            margin-right: 3%;
+            font-size: 75%;
+            margin-left: -2%;
+            margin-right: 5%;
         }
 
         #days {
@@ -270,55 +271,56 @@
     });
 
     function renderMonth(year, month) {
-        days.innerHTML = "";
-        const firstDayOfMonth = new Date(year, month, 1);
-        const lastDayOfMonth = new Date(year, month + 1, 0);
-        const daysInMonth = lastDayOfMonth.getDate();
-        const firstDayOfWeek = firstDayOfMonth.getDay(); // Domingo: 0, Segunda: 1, ..., Sábado: 6
+    days.innerHTML = "";
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const daysInMonth = lastDayOfMonth.getDate();
+    const firstDayOfWeek = firstDayOfMonth.getDay(); // Domingo: 0, Segunda: 1, ..., Sábado: 6
 
-        // Renderiza dias vazios até o primeiro dia do mês começar na posição correta na semana
-        for (let i = 0; i < firstDayOfWeek; i++) {
-            const emptyLi = document.createElement("li");
-            emptyLi.classList.add("day");
-            emptyLi.classList.add("other-month");
-            days.appendChild(emptyLi);
-        }
-
-        // Renderiza os dias do mês
-        for (let i = 1; i <= daysInMonth; i++) {
-            const li = document.createElement("li");
-            li.classList.add("day");
-            li.textContent = i;
-
-            // Adiciona classes de estilo
-            const dayOfWeek = (firstDayOfWeek + i - 1) % 7; // Dia da semana (0 a 6)
-            if (dayOfWeek === 0) {
-                li.classList.add("current-month");
-            } else {
-                li.classList.add("other-month");
-            }
-            if (i === currentDay && month === currentMonth && year === currentYear) {
-                li.classList.add("today");
-            }
-
-            // Adiciona evento de clique para selecionar a data e mostrar horários disponíveis
-            li.addEventListener("click", () => {
-                const currentSelected = document.querySelector(".selected");
-                if (currentSelected) {
-                    currentSelected.classList.remove("selected");
-                }
-                li.classList.add("selected");
-
-                // Mostra os horários disponíveis
-                showAvailableTimes(dayOfWeek);
-            });
-
-            days.appendChild(li);
-        }
-
-        // Atualiza o texto do mês e ano
-        monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
+    // Renderiza dias vazios até o primeiro dia do mês começar na posição correta na semana
+    for (let i = 0; i < firstDayOfWeek; i++) {
+        const emptyLi = document.createElement("li");
+        emptyLi.classList.add("day");
+        emptyLi.classList.add("other-month");
+        days.appendChild(emptyLi);
     }
+
+    // Renderiza os dias do mês
+    for (let i = 1; i <= daysInMonth; i++) {
+        const li = document.createElement("li");
+        li.classList.add("day");
+        li.textContent = i < 10 ? '0' + i : i; // Adiciona zero se o dia for menor que 10
+
+        // Adiciona classes de estilo
+        const dayOfWeek = (firstDayOfWeek + i - 1) % 7; // Dia da semana (0 a 6)
+        if (dayOfWeek === 0) {
+            li.classList.add("current-month");
+        } else {
+            li.classList.add("other-month");
+        }
+        if (i === currentDay && month === currentMonth && year === currentYear) {
+            li.classList.add("today");
+        }
+
+        // Adiciona evento de clique para selecionar a data e mostrar horários disponíveis
+        li.addEventListener("click", () => {
+            const currentSelected = document.querySelector(".selected");
+            if (currentSelected) {
+                currentSelected.classList.remove("selected");
+            }
+            li.classList.add("selected");
+
+            // Mostra os horários disponíveis
+            showAvailableTimes(dayOfWeek);
+        });
+
+        days.appendChild(li);
+    }
+
+    // Atualiza o texto do mês e ano
+    monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
+}
+
 
     // Função para mostrar os horários disponíveis
     function showAvailableTimes(dayOfWeek) {

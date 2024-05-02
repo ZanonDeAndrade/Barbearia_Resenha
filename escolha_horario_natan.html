@@ -187,13 +187,6 @@
         <span>Sexta</span>
         <span>Sábado</span>
     </div>
-    <select id="time-dropdown">
-        <option value="08:00">08:00</option>
-        <option value="09:00">09:00</option>
-        <option value="10:00">10:00</option>
-        <!-- Adicione mais opções conforme necessário -->
-    </select>
-    
     <ul id="days"></ul>
 
     <!-- Container para os horários disponíveis -->
@@ -332,7 +325,13 @@ function renderAvailableTimes(dayOfWeek) {
     const selectedDate = document.querySelector('.selected').textContent;
 
     // Obtemos o horário selecionado
-    const selectedTime = document.getElementById('time-dropdown').value;
+    let selectedTime;
+    const timeButtons = document.querySelectorAll('.time-button');
+    timeButtons.forEach(button => {
+        if (button.classList.contains('selected')) {
+            selectedTime = button.textContent;
+        }
+    });
 
     // Obtemos o nome do mês atual
     const currentMonthName = months[currentMonth];
@@ -344,14 +343,12 @@ function renderAvailableTimes(dayOfWeek) {
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
 
     // Formamos a mensagem a ser enviada para o WhatsApp
-     // Formamos a mensagem a ser enviada para o WhatsApp
-     const mensagem = `✅  Confirmação de Agendamento 💈
-🗓️ Data: ${selectedDate} / ${currentMonthName}
-⏰ Hora: ${selectedTime}
-✂️ Serviço: ${servicoSelecionado}
-💇🏻‍♂️ Profissional: Bruno Descovi
-💰 Valor: ${precoServicoSelecionado}`;
-
+    const mensagem = `✅  Confirmação de Agendamento 💈
+    🗓️ Data: ${selectedDate} / ${currentMonthName}
+    ⏰ Hora: ${selectedTime}
+    ✂️ Serviço: ${servicoSelecionado}
+    💇🏻‍♂️ Profissional: Natan Peixoto
+    💰 Valor: ${precoServicoSelecionado}`;
 
     // Formata a mensagem para incluir na URL
     const mensagemFormatada = encodeURIComponent(mensagem);

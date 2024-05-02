@@ -14,7 +14,7 @@ function redirecionarParaBruno() {
     window.location.href = 'index.html'
   }
 
-  function redirecionarescolha_horario_bruno(){
+  function redirecionarescolha_horario_bruno(elemento){
     window.location.href = 'escolha_horario_bruno.html'
   }
 

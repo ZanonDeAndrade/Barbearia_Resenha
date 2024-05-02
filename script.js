@@ -18,7 +18,7 @@ function redirecionarParaBruno() {
     window.location.href = 'escolha_horario_bruno.html'
   }
 
-  function redirecionarescolha_horario_natan(){
+  function redirecionarescolha_horario_natan(elemento){
     window.location.href = 'escolha_horario_natan.html'
   }
 

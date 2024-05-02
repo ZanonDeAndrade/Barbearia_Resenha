@@ -389,12 +389,13 @@
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
 
     // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `\u2705 ️ Confirmação de Agendamento
-Data: 23 / Maio
-Hora: 09:00
-\u2702️ Serviço: Barba Completa
-\u1F468\u200D\u2695️ Profissional: Natan Peixoto
-\u1F4B5 Valor: R$25,00`;
+    const mensagem = `\u2705 \uD83D\uDDE8️ Confirmação de Agendamento
+Data: ${selectedDate} / ${currentMonthName}
+Hora: ${selectedTime}
+\uD83D\uDCA4Serviço: ${servicoSelecionado}
+\uD83D\uDC87\uD83C\uDFFB\u200D♂️Profissional: Natan Peixoto
+\uD83D\uDCAFValor: ${precoServicoSelecionado}`;
+
 
 
 

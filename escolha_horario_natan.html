@@ -389,15 +389,12 @@
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
 
     // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `\u2705 \uD83D\uDDE8️ Confirmação de Agendamento
+    const mensagem = `✅  Confirmação de Agendamento
 Data: ${selectedDate} / ${currentMonthName}
 Hora: ${selectedTime}
-\uD83D\uDCA4Serviço: ${servicoSelecionado}
-\uD83D\uDC87\uD83C\uDFFB\u200D♂️Profissional: Natan Peixoto
-\uD83D\uDCAFValor: ${precoServicoSelecionado}`;
-
-
-
+✂️ Serviço: ${servicoSelecionado}
+💇🏻‍♂️ Profissional: Natan Peixoto
+💵 Valor: ${precoServicoSelecionado}`;
 
 
     // Formata a mensagem para incluir na URL

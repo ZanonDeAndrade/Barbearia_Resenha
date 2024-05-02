@@ -114,18 +114,22 @@
         let servicoSelecionado = '';
 
         function redirecionarescolha_horario(elemento) {
-            // Obtenha o nome do serviço e o preço
-            const servico = elemento.querySelector('h3').textContent;
-            const preco = elemento.querySelector('h4').textContent;
+    // Obtenha o nome do serviço e o preço
+        const servico = elemento.querySelector('h3').textContent;
+        const preco = elemento.querySelector('h4').textContent;
 
-            // Armazene o serviço selecionado no Local Storage
-            localStorage.setItem('servicoSelecionado', servico);
-            localStorage.setItem('precoServicoSelecionado', preco);
+        // Armazene o serviço selecionado no Local Storage
+        localStorage.setItem('servicoSelecionado', servico);
+        localStorage.setItem('precoServicoSelecionado', preco);
 
-            // Redirecione para a página de escolha de horário ou faça qualquer outra ação necessária
-            // Por exemplo:
-            window.location.href = 'escolha_horario.html';
-        }
+        // Armazene o serviço selecionado em uma variável global
+        servicoSelecionado = servico;
+
+        // Redirecione para a página de escolha de horário ou faça qualquer outra ação necessária
+        // Por exemplo:
+        window.location.href = 'escolha_horario.html';
+    }
+
     </script>
 
 </body>

@@ -382,9 +382,8 @@
     // Obtemos o nome do mês atual
     const currentMonthName = months[currentMonth];
 
-    // Obtemos o serviço selecionado
-    const servicoSelecionadoElement = document.querySelector('.selected h3');
-    const servicoSelecionado = servicoSelecionadoElement ? servicoSelecionadoElement.textContent : '';
+    // Obtemos o serviço selecionado da variável global
+    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
 
     // Obtemos o preço do serviço selecionado
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');

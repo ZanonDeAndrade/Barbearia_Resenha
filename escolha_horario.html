@@ -365,10 +365,8 @@
     // Recupere o serviço armazenado no Local Storage
    // Recupere o serviço armazenado no Local Storage
     const servicoSelecionado = localStorage.getItem('servicoSelecionado');
-
+    const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado')
     // Exiba o serviço selecionado na página
-    const servicoSelecionadoDiv = document.getElementById('servico-selecionado');
-    servicoSelecionadoDiv.textContent = `Serviço Selecionado: ${servicoSelecionado}`;
 
 
 
@@ -385,7 +383,12 @@
     const currentMonthName = months[currentMonth];
 
     // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `Olá! Gostaria de confirmar meu agendamento de ${servicoSelecionado} para o dia ${selectedDate} de ${currentMonthName} às ${selectedTime}.`;
+    const mensagem = `✅ 💈Confirmação de Agendamento\n
+Data: ${selectedDate} / ${currentMonthName}\n
+Hora: ${selectedTime}\n
+✂️Serviço: ${servicoSelecionado}\n
+💇🏻‍♂️Profissional: Bruno Descovi\n
+💵Valor: ${precoServicoSelecionado}`;
 
     // Formata a mensagem para incluir na URL
     const mensagemFormatada = encodeURIComponent(mensagem);

@@ -14,10 +14,13 @@ function redirecionarParaBruno() {
     window.location.href = 'index.html'
   }
 
-  function redirecionarescolha_horario(){
-    window.location.href = 'escolha_horario.html'
+  function redirecionarescolha_horario_bruno(){
+    window.location.href = 'escolha_horario_bruno.html'
   }
 
+  function redirecionarescolha_horario_natan(){
+    window.location.href = 'escolha_horario_natan.html'
+  }
 
 
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
+    <script src="./script.js"></script>
     <style>
         * {
             margin: 0;
@@ -132,7 +133,7 @@
             background-position: right center; /* Posiciona a seta personalizada */
             background-size: 30%; /* Tamanho da seta personalizada */
             text-align: center;
-            margin-bottom: 15%;
+            margin-bottom: 10%;
         }
 
         #calendar-controls {
@@ -179,41 +180,6 @@
             margin-bottom: 25%;
         }
 
-        /* Estilo para a janela de diálogo */
-        #dialog-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #dialog-box {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        #dialog-box input {
-            margin: 10px 0;
-            padding: 5px;
-            width: 80%;
-        }
-
-        #dialog-box button {
-            margin-top: 10px;
-            padding: 5px 20px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -258,24 +224,12 @@
             <!-- Domingo não tem horário -->
         </select>
     </div>
-    <div class="confirmar" onclick="solicitarDados()">
+    <div class="confirmar" onclick="confirmarAgendamento()">
         <h1>Confirmar Agendamento</h1>
     </div>
 
     <!-- Snackbar para alertar o usuário -->
     <div id="snackbar">Por favor, selecione uma data e um horário para o agendamento.</div>
-
-    <!-- Janela de diálogo para solicitar nome e número -->
-    <div id="dialog-overlay">
-        <div id="dialog-box">
-            <h2>Por favor, forneça seu nome e número de telefone:</h2>
-            <input type="text" id="nome" placeholder="Nome">
-            <br>
-            <input type="text" id="telefone" placeholder="Número de Telefone">
-            <br>
-            <button onclick="enviarMensagem()">Confirmar</button>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -402,27 +356,29 @@
             snackbar.style.visibility = "hidden";
         }, 4000); // Esconde o Snackbar após 3 segundos
     });
+    
 
-    // Função para solicitar nome e número
-    function solicitarDados() {
-        const overlay = document.getElementById("dialog-overlay");
-        overlay.style.display = "flex";
-    }
-
-    // Função para enviar mensagem ao confirmar agendamento
-    function enviarMensagem() {
-        const nome = document.getElementById("nome").value;
-        const telefone = document.getElementById("telefone").value;
+    function confirmarAgendamento() {
+        // Obtemos a data selecionada
         const selectedDate = document.querySelector('.selected').textContent;
+
+        // Obtemos o horário selecionado
         const selectedTime = document.getElementById('time-dropdown').value;
-        const mensagem = `Olá, ${nome}! Seu agendamento para o dia ${selectedDate} às ${selectedTime} está confirmado.`;
-        
-        // Formato do link do WhatsApp
-        const linkWhatsApp = `https://api.whatsapp.com/send?phone=5555999061027&text=${encodeURIComponent(mensagem)}`;
-        
-        // Abre o link do WhatsApp com a mensagem pré-preenchida
-        window.open(linkWhatsApp);
+
+        // Formamos a mensagem a ser enviada para o WhatsApp
+        const mensagem = `Olá! Meu agendamento está confirmado para o dia ${selectedDate} às ${selectedTime}.`;
+
+        // Formata a mensagem para incluir na URL
+        const mensagemFormatada = encodeURIComponent(mensagem);
+
+        // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
+        const numeroTelefone = "+5555999061027";
+
+        // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
+        window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
     }
+
+
 
 </script>
 </body>

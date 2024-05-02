@@ -382,12 +382,19 @@
     // Obtemos o nome do mês atual
     const currentMonthName = months[currentMonth];
 
+    // Obtemos o serviço selecionado
+    const servicoSelecionadoElement = document.querySelector('.selected h3');
+    const servicoSelecionado = servicoSelecionadoElement ? servicoSelecionadoElement.textContent : '';
+
+    // Obtemos o preço do serviço selecionado
+    const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
+
     // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `✅ 💈Confirmação de Agendamento\n
-Data: ${selectedDate} / ${currentMonthName}\n
-Hora: ${selectedTime}\n
-✂️Serviço: ${servicoSelecionado}\n
-💇🏻‍♂️Profissional: Bruno Descovi\n
+    const mensagem = `✅ 💈Confirmação de Agendamento
+Data: ${selectedDate} / ${currentMonthName}
+Hora: ${selectedTime}
+✂️Serviço: ${servicoSelecionado}
+💇🏻‍♂️Profissional: Bruno Descovi
 💵Valor: ${precoServicoSelecionado}`;
 
     // Formata a mensagem para incluir na URL
@@ -399,6 +406,7 @@ Hora: ${selectedTime}\n
     // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
+
 
 
 

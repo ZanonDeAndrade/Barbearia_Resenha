@@ -384,21 +384,36 @@
     // Obtemos o nome do mês atual
     const currentMonthName = months[currentMonth];
 
-    // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `Olá! Gostaria de confirmar meu agendamento de ${servicoSelecionado} para o dia ${selectedDate} de ${currentMonthName} às ${selectedTime}.`;
+    // Recupere o serviço selecionado
+    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
 
-    // Formata a mensagem para incluir na URL
-    const mensagemFormatada = encodeURIComponent(mensagem);
+    // Defina o nome do profissional
+    const profissional = "Bruno Descovi"; // Substitua pelo nome do profissional desejado
+
+    // Defina o valor do serviço
+    const valorServico = "R$ 30,00"; // Substitua pelo valor do serviço desejado
+
+    // Formate a mensagem em HTML
+    const mensagemHTML = `
+        <div style="font-size: 16px;">
+            <p style="margin: 10px 0;"><strong>✅ 💈 Confirmação de Agendamento</strong></p>
+            <p style="margin: 5px 0;"><strong>Data:</strong> ${selectedDate} de ${currentMonthName}</p>
+            <p style="margin: 5px 0;"><strong>Hora:</strong> ${selectedTime}</p>
+            <p style="margin: 5px 0;"><strong>✂️ Serviço:</strong> ${servicoSelecionado}</p>
+            <p style="margin: 5px 0;"><strong>💇🏻‍♂️ Profissional:</strong> ${profissional}</p>
+            <p style="margin: 5px 0;"><strong>💵 Valor:</strong> ${valorServico} Reais</p>
+        </div>
+    `;
+
+    // Converta a mensagem HTML em texto
+    const mensagemFormatada = encodeURIComponent(mensagemHTML);
 
     // Número de telefone para o qual a mensagem será enviada (substitua pelo número desejado)
     const numeroTelefone = "+5555999061027";
 
-    // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
+    // Abra o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
-
-
-
 
 </script>
 </body>

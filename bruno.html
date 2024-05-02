@@ -100,7 +100,8 @@
             const services = document.getElementsByClassName('tipo_servico')[0].children;
 
             for (let i = 0; i < services.length; i++) {
-                if (services[i].textContent.toUpperCase().indexOf(filter) > -1) {
+                const serviceName = services[i].querySelector('h3').textContent.toUpperCase();
+                if (serviceName.indexOf(filter) > -1) {
                     services[i].style.display = '';
                 } else {
                     services[i].style.display = 'none';
@@ -109,27 +110,23 @@
             return false; // Evita o envio padrão do formulário
         }
 
-            // Defina uma variável global para armazenar o serviço selecionado
         // Defina uma variável global para armazenar o serviço selecionado
         let servicoSelecionado = '';
 
         function redirecionarescolha_horario(elemento) {
-    // Obtenha o nome do serviço e o preço
-        const servico = elemento.querySelector('h3').textContent;
-        const preco = elemento.querySelector('h4').textContent;
+            // Obtenha o nome do serviço e o preço
+            const servico = elemento.querySelector('h3').textContent;
+            const preco = elemento.querySelector('h4').textContent;
 
-        // Armazene o serviço selecionado no Local Storage
-        localStorage.setItem('servicoSelecionado', servico);
-        localStorage.setItem('precoServicoSelecionado', preco);
+            // Armazene o serviço selecionado no Local Storage
+            localStorage.setItem('servicoSelecionado', servico);
+            localStorage.setItem('precoServicoSelecionado', preco);
 
-        // Redirecione para a página de escolha de horário ou faça qualquer outra ação necessária
-        // Por exemplo:
-        window.location.href = 'escolha_horario.html';
-}
-
-
-
-
+            // Redirecione para a página de escolha de horário ou faça qualquer outra ação necessária
+            // Por exemplo:
+            window.location.href = 'escolha_horario.html';
+        }
     </script>
+
 </body>
 </html>

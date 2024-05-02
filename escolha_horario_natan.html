@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
     <style>
         * {
             margin: 0;
@@ -50,7 +50,6 @@
             font-size: 140%;
             font-weight: bold;
             margin-bottom: 5%;
-            
         }
 
         #week-days {
@@ -64,7 +63,6 @@
         #week-days span {
             line-height: 30px;
             font-size: 75%;
-          
         }
 
         #days {
@@ -116,38 +114,39 @@
             margin-top: 15%;
         }
 
-        #time-dropdown {
-            padding: 2%;
-            font-size: 130%; /* Tamanho do texto do seletor */
-            margin-top: 5%;
-            color: #000;
-            background-color: #FFF;
-            border: 2px solid #000;
-            border-radius: 5px;
-            width: 45%;
-            -webkit-appearance: none; /* Remove a aparência padrão do seletor */
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 20 20"><path d="M6 8l4 4 4-4z"/></svg>'); /* Define uma imagem personalizada como a seta */
-            background-repeat: no-repeat;
-            background-position: right center; /* Posiciona a seta personalizada */
-            background-size: 30%; /* Tamanho da seta personalizada */
-            text-align: center;
-            margin-bottom: 10%;
+        #times-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
         }
 
-        #calendar-controls {
-            margin-top: 20px; /* Espaço acima dos controles */
-        }
-
-        #calendar-controls button {
-            margin: 5px;
+        .time-button {
             background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .time-button.selected {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .confirmar {
+            background-color: #FFF;
             color: #000;
             border: 2px solid #000;
-            border-radius: 5px;
+            font-size: 55%;
+            font-weight: bold;
+            width: 70%;
+            text-align: center;
             padding: 2%;
-            font-size: 80%;
+            border-radius: 5px;
+            margin: 0 auto; /* Isso centraliza a caixa horizontalmente */
+            margin-bottom: 25%;
         }
 
         /* Estilo para o Snackbar */
@@ -166,22 +165,6 @@
             transform: translateX(-50%);
             font-size: 17px;
         }
-        .confirmar {
-            background-color: #FFF;
-            color: #000;
-            border: 2px solid #000;
-            font-size: 55%;
-            font-weight: bold;
-            width: 70%;
-            text-align: center;
-            padding: 2%;
-            border-radius: 5px;
-            margin: 0 auto; /* Isso centraliza a caixa horizontalmente */
-            margin-bottom: 25%;
-        }
-
-
-
     </style>
 </head>
 <body>
@@ -192,6 +175,7 @@
 <div class="voltar" onclick="redirecionarParaBruno()">
     <h1>VOLTAR</h1>
 </div>
+
 <div id="calendar">
     <div id="month-year"></div>
     <div id="week-days">
@@ -205,27 +189,12 @@
     </div>
     <ul id="days"></ul>
 
-    <div id="calendar-controls">
-        <button id="prev-month"><b>< Mês Anterior</b></button>
-        <button id="next-month"><b>Próximo Mês ></b></button>
-    </div>
-
+    <!-- Container para os horários disponíveis -->
     <div id="available-times">
         <h3>Horários disponíveis:</h3>
-        <select id="time-dropdown">
-            <!-- Horários para dias da semana (segunda a sexta) -->
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="11:00">12:00</option>
-            <!-- Horários para sábado -->
-            <option value="08:00">08:00</option>
-            <option value="10:00">10:00</option>
-            <option value="12:00">12:00</option>
-            <option value="11:00">13:00</option>
-            <!-- Domingo não tem horário -->
-        </select>
+        <div id="times-container"></div>
     </div>
+
     <div class="confirmar" onclick="confirmarAgendamento()">
         <h1>Confirmar Agendamento</h1>
     </div>
@@ -242,34 +211,11 @@
 
     const calendar = document.getElementById("calendar");
     const days = calendar.querySelector("#days");
-    const prevMonthBtn = calendar.querySelector("#prev-month");
-    const nextMonthBtn = calendar.querySelector("#next-month");
     const monthYear = calendar.querySelector("#month-year");
-    const timeDropdown = document.getElementById("time-dropdown");
     const daysOfWeek = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
     renderMonth(currentYear, currentMonth);
-
-    prevMonthBtn.addEventListener("click", () => {
-        if (currentMonth === 0) {
-            currentYear -= 1;
-            currentMonth = 11;
-        } else {
-            currentMonth -= 1;
-        }
-        renderMonth(currentYear, currentMonth);
-    });
-
-    nextMonthBtn.addEventListener("click", () => {
-        if (currentMonth === 11) {
-            currentYear += 1;
-            currentMonth = 0;
-        } else {
-            currentMonth += 1;
-        }
-        renderMonth(currentYear, currentMonth);
-    });
 
     function renderMonth(year, month) {
     days.innerHTML = "";
@@ -322,36 +268,49 @@
     monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
 }
 
+    // Função para renderizar os horários disponíveis horizontalmente
+    // Função para renderizar os horários disponíveis horizontalmente
+function renderAvailableTimes(dayOfWeek) {
+    const timesContainer = document.getElementById("times-container");
+    timesContainer.innerHTML = ""; // Limpa os horários anteriores
 
-    // Função para mostrar os horários disponíveis
-    function showAvailableTimes(dayOfWeek) {
-        const availableTimesDiv = document.getElementById("available-times");
-        const dropdown = document.getElementById("time-dropdown");
-        dropdown.innerHTML = ""; // Limpa as opções anteriores
-
-        // Verifica o dia da semana
-        if (dayOfWeek === 6) { // Sábado
-            const saturdayTimes = ["08:00", "10:00", "12:00", "13:00"];
-            saturdayTimes.forEach(time => {
-                const option = document.createElement("option");
-                option.textContent = time;
-                option.value = time;
-                dropdown.appendChild(option);
-            });
-        } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
-            const weekdayTimes = ["09:00", "10:00", "11:00", "12:00"];
-            weekdayTimes.forEach(time => {
-                const option = document.createElement("option");
-                option.textContent = time;
-                option.value = time;
-                dropdown.appendChild(option);
-            });
-        }
-
-        availableTimesDiv.style.display = "block";
+    // Verifica o dia da semana e exibe os horários correspondentes
+    let availableTimes;
+    if (dayOfWeek === 6) { // Sábado
+        availableTimes = ["08:00", "10:00", "12:00", "13:00"];
+    } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
+        availableTimes = ["09:00", "10:00", "11:00", "12:00"];
     }
 
-    // Mostra o Snackbar quando a página é carregada
+    // Adiciona os horários ao container
+    availableTimes.forEach(time => {
+        const timeButton = document.createElement("button");
+        timeButton.textContent = time;
+        timeButton.classList.add("time-button");
+        timeButton.addEventListener("click", () => {
+            // Remove a seleção de todos os botões de horário
+            const allTimeButtons = document.querySelectorAll(".time-button");
+            allTimeButtons.forEach(button => {
+                button.classList.remove("selected");
+            });
+
+            // Adiciona a classe "selected" ao botão de horário clicado
+            timeButton.classList.add("selected");
+        });
+        timesContainer.appendChild(timeButton);
+    });
+}
+
+
+    // Função para mostrar os horários disponíveis quando uma data é selecionada
+    function showAvailableTimes(dayOfWeek) {
+        const availableTimesDiv = document.getElementById("available-times");
+        availableTimesDiv.style.display = "block";
+
+        renderAvailableTimes(dayOfWeek);
+    }
+
+    // Função para mostrar o Snackbar quando a página é carregada
     document.addEventListener('DOMContentLoaded', function () {
         var snackbar = document.getElementById("snackbar");
         snackbar.style.visibility = "visible";
@@ -360,18 +319,7 @@
         }, 4000); // Esconde o Snackbar após 3 segundos
     });
 
-
-    
-    // Recupere o serviço armazenado no Local Storage
-   // Recupere o serviço armazenado no Local Storage
-    const servicoSelecionado = localStorage.getItem('servicoSelecionado');
-    const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado')
-    // Exiba o serviço selecionado na página
-
-
-
-    
-
+    // Função para confirmar o agendamento
     function confirmarAgendamento() {
     // Obtemos a data selecionada
     const selectedDate = document.querySelector('.selected').textContent;
@@ -389,11 +337,12 @@
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
 
     // Formamos a mensagem a ser enviada para o WhatsApp
-    const mensagem = `✅  Confirmação de Agendamento 💈
+     // Formamos a mensagem a ser enviada para o WhatsApp
+     const mensagem = `✅  Confirmação de Agendamento 💈
 🗓️ Data: ${selectedDate} / ${currentMonthName}
 ⏰ Hora: ${selectedTime}
 ✂️ Serviço: ${servicoSelecionado}
-💇🏻‍♂️ Profissional: Natan Peixoto
+💇🏻‍♂️ Profissional: Bruno Descovi
 💰 Valor: ${precoServicoSelecionado}`;
 
 
@@ -406,7 +355,7 @@
     // Abre o WhatsApp Web em uma nova guia com a mensagem pré-preenchida
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
-
 </script>
+
 </body>
 </html>

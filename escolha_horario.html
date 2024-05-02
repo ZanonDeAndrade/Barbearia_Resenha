@@ -416,9 +416,9 @@
         const selectedDate = document.querySelector('.selected').textContent;
         const selectedTime = document.getElementById('time-dropdown').value;
         const mensagem = `Olá, ${nome}! Seu agendamento para o dia ${selectedDate} às ${selectedTime} está confirmado.`;
-        const mensagemFormatada = encodeURIComponent(mensagem);
-        const numeroTelefone = encodeURIComponent(telefone);
-        window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
+        
+        // Substitua o link abaixo pelo script que envia a mensagem para o número de telefone fornecido
+        window.location.href = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
     }
 
 </script>

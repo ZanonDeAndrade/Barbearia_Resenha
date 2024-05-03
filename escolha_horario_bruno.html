@@ -266,7 +266,7 @@
     const firstDayOfMonth = new Date(year, month, 1);
     const lastDayOfMonth = new Date(year, month + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
-    const firstDayOfWeek = firstDayOfMonth.getDay(); // Domingo: 0, Segunda: 1, ..., Sábado: 6
+    const firstDayOfWeek = firstDayOfMonth.getDay(); 
 
     // Renderiza dias vazios até o primeiro dia do mês começar na posição correta na semana
     for (let i = 0; i < firstDayOfWeek; i++) {
@@ -311,8 +311,6 @@
     // Atualiza o texto do mês e ano
     monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
 }
-
-    // Função para renderizar os horários disponíveis horizontalmente
     // Função para renderizar os horários disponíveis horizontalmente
     function renderAvailableTimes(dayOfWeek) {
         const timesContainer = document.getElementById("times-container");
@@ -377,7 +375,7 @@
         snackbar.style.visibility = "visible";
         setTimeout(function () {
             snackbar.style.visibility = "hidden";
-        }, 4000); // Esconde o Snackbar após 3 segundos
+        }, 3000); // Esconde o Snackbar após 3 segundos
     });
 
     // Função para confirmar o agendamento
@@ -402,7 +400,8 @@
     const currentMonthName = months[currentMonth];
     const servicoSelecionado = localStorage.getItem('servicoSelecionado');
     const precoServicoSelecionado = localStorage.getItem('precoServicoSelecionado');
-    const mensagem = `✅  Confirmação de Agendamento 💈\n🗓️ Data: ${selectedDate} / ${currentMonthName}
+    const mensagem = `✅  Confirmação de Agendamento 💈
+🗓️ Data: ${selectedDate} / ${currentMonthName}
 ⏰ Hora: ${selectedTime}
 ✂️ Serviço: ${servicoSelecionado}
 💇🏻‍♂️ Profissional: Bruno Descovi

@@ -68,10 +68,16 @@
     display: flex;
 }
 
+.Bruno02{
+    background-color: #b3b3b3;
+    width: 40%;
+    color: #b3b3b3;
+    border-radius: 5px;
+}
+
 .Bruno img {
     width: 8rem;
     border-radius: 5px;
-
 }
 
 .Bruno h1 {
@@ -79,7 +85,7 @@
     font-size: 140%;
     font-weight: bold;
     text-align: center;
-    margin-top: 12%;
+    margin-top: 10%;
     padding-bottom: 10%;
     padding-left: 5%;
 }
@@ -96,6 +102,13 @@
     margin-bottom: 10%;
 }
 
+.Natan02{
+    color: #b3b3b3;
+    width: 40%;
+    background-color: #b3b3b3;
+    border-radius: 5px;
+}
+
 .Natan img {
     width: 8rem;
     border-radius: 5px;
@@ -107,7 +120,7 @@
     font-size: 140%;
     font-weight: bold;
     text-align: center;
-    margin-top: 12%;
+    margin-top: 10%;
     padding-bottom: 10%;
     padding-left: 5%;
 }

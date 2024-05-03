@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
     <script src="script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
+    <script src="firebase-config.js"></script>
+
+
     <style>
         * {
             margin: 0;
@@ -379,6 +384,7 @@
     function confirmarAgendamento() {
     // Verifica se algum horário foi selecionado
     const selectedTimeButton = document.querySelector('.time-button.selected');
+
     if (!selectedTimeButton) {
         // Se nenhum horário foi selecionado, exibe uma mensagem de alerta
         const snackbar = document.getElementById("snackbar");
@@ -406,7 +412,6 @@
     const numeroTelefone = "+5555999061027";
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
-
 </script>
 
 </body>

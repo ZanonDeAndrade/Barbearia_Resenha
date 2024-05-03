@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
     <script src="script.js"></script>
     <style>
         * {
@@ -206,7 +209,7 @@
 <div class="topo">
     <img src="./assets/432103263_1437441706876446_1266250850596522407_n.jpg" alt="">
 </div>
-<div class="voltar" onclick="redirecionarParaBruno()">
+<div class="voltar" onclick="redirecionarParaNatan()">
     <h1>VOLTAR</h1>
 </div>
 
@@ -372,7 +375,7 @@
         snackbar.style.visibility = "visible";
         setTimeout(function () {
             snackbar.style.visibility = "hidden";
-        }, 4000); // Esconde o Snackbar após 3 segundos
+        }, 3000); // Esconde o Snackbar após 3 segundos
     });
 
     // Função para confirmar o agendamento
@@ -399,7 +402,7 @@
     const mensagem = `✅  Confirmação de Agendamento 💈\n🗓️ Data: ${selectedDate} / ${currentMonthName}
 ⏰ Hora: ${selectedTime}
 ✂️ Serviço: ${servicoSelecionado}
-💇🏻‍♂️ Profissional: Bruno Descovi
+💇🏻‍♂️ Profissional: Natan Peixoto
 💰 Valor: ${precoServicoSelecionado}`;
 
     const mensagemFormatada = encodeURIComponent(mensagem);
@@ -408,6 +411,5 @@
 }
 
 </script>
-
 </body>
 </html>

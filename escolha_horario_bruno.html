@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário</title>
     <script src="script.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
-    <script src="firebase-config.js"></script>
-
 
     <style>
         * {
@@ -312,7 +308,7 @@
     monthYear.textContent = `${months[firstDayOfMonth.getMonth()]} ${year}`;
 }
     // Função para renderizar os horários disponíveis horizontalmente
-    function renderAvailableTimes(dayOfWeek) {
+    async function renderAvailableTimes(dayOfWeek) {
         const timesContainer = document.getElementById("times-container");
         timesContainer.innerHTML = ""; // Limpa os horários anteriores
 
@@ -321,8 +317,25 @@
         if (dayOfWeek === 6) { // Sábado
             availableTimes = ["08:00", "10:00", "12:00", "13:00"];
         } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
-            availableTimes = ["09:00", "09:30","10:00","10:30", "11:00", "13:30", "14:00", "14:30", "15:00","15:30", "16:00","16:30", "17:00","17:30", "18:00","18:30", "19:00", "19:30"];
+            availableTimes = ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
         }
+
+       const options = {method: 'GET'};
+
+    
+    const selectedDate = document.querySelector('.selected').textContent;
+    const currentMonthName = months[currentMonth];
+
+const response = await fetch(`https://api-barbearia-swart.vercel.app/agenda?data=${selectedDate}%2F${currentMonthName}%2F2024&barbeiro=Bruno`, options)
+  .then(response => response.json())
+
+  const unavailablesTimes = response.map(item => item.horario )
+  availableTimes = availableTimes.filter (item => !unavailablesTimes.includes(item))
+
+
+
+  console.log (unavailablesTimes)
+
 
         // Adiciona os horários ao container
         availableTimes.forEach(time => {
@@ -409,6 +422,18 @@
 
     const mensagemFormatada = encodeURIComponent(mensagem);
     const numeroTelefone = "+5555999061027";
+
+    const options = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: `{"data":"${selectedDate}/${currentMonthName}/2024","horario":"${selectedTime}","barbeiro":"Bruno"}`
+};
+
+fetch('https://api-barbearia-swart.vercel.app/agenda', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+
     window.open(`https://wa.me/${numeroTelefone}?text=${mensagemFormatada}`);
 }
 </script>

@@ -61,7 +61,7 @@
 .Bruno {
     background-color: #000;
     border-radius: 5px;
-    width: 100%; /* Aumenta a largura da caixa */
+    width: 99%; /* Aumenta a largura da caixa */
     padding: 5% ; /* Ajusta o preenchimento conforme necessário */
     color: #FFF;
     margin-top: 10%; /* Mantém a caixa centralizada verticalmente */
@@ -83,14 +83,15 @@
     text-align: center;
     margin-top: 10%;
     padding-bottom: 10%;
-    padding-left: 5%;
+    padding-left: 20%;
+
 }
 
 
 .Natan {
     background-color: #000;
     border-radius: 5px;
-    width: 100%; /* Aumenta a largura da caixa */
+    width: 99%; /* Aumenta a largura da caixa */
     padding: 5% ; /* Ajusta o preenchimento conforme necessário */
     color: #FFF;
     margin-top: 8%; /* Mantém a caixa centralizada verticalmente */

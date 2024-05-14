@@ -315,9 +315,9 @@
         // Verifica o dia da semana e exibe os horários correspondentes
         let availableTimes;
         if (dayOfWeek === 6) { // Sábado
-            availableTimes = ["08:00", "10:00", "12:00", "13:00"];
+            availableTimes = ["07:00","08:00","09:00", "10:00", "11:00", "13:00","14:00","15:00", "16:00"];
         } else if (dayOfWeek !== 0) { // Dias da semana (segunda a sexta)
-            availableTimes = ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+            availableTimes = ["07:00","08:00","09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
         }
 
        const options = {method: 'GET'};
@@ -421,7 +421,7 @@ const response = await fetch(`https://api-barbearia-swart.vercel.app/agenda?data
 💰 Valor: ${precoServicoSelecionado}`;
 
     const mensagemFormatada = encodeURIComponent(mensagem);
-    const numeroTelefone = "+5555999061027";
+    const numeroTelefone = "+5555997254006";
 
     const options = {
   method: 'POST',

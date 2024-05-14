@@ -23,6 +23,13 @@ function redirecionarParaBruno() {
   }
 
 
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('.icon').onclick = function() {
+            window.location.href = 'https://maps.app.goo.gl/BjAscGq3DLzSE5pF8?g_st=ic';
+        };
+    });
+
+
 
   
 

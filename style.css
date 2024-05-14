@@ -68,16 +68,12 @@
     display: flex;
 }
 
-.Bruno02{
-    background-color: #b3b3b3;
-    width: 40%;
-    color: #b3b3b3;
-    border-radius: 5px;
-}
+
 
 .Bruno img {
     width: 8rem;
     border-radius: 5px;
+    margin-left: -1%;
 }
 
 .Bruno h1 {

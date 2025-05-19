@@ -25,7 +25,7 @@ function redirecionarParaBruno() {
 
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.icon').onclick = function() {
-            window.location.href = 'https://maps.app.goo.gl/DwMKgxPuMrdNUYZs6?g_st=com.google.maps.preview.copy';
+            window.location.href = 'https://maps.app.goo.gl/f6HdF9yJkZ4tkBpS9?g_st=com.google.maps.preview.copy';
         };
     });
 
